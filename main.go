@@ -21,6 +21,8 @@ func main() {
 	g.POST("/empoylee/v1/empolyee", h.Create)
 	g.GET("/empoylee/v1/empolyee/{id}", h.Get)
 	g.GET("/empoylee/v1/empolyee", h.GetAll)
+	g.PUT("/employee/v1/employee/{id}", h.Update)
+	g.DELETE("/employee/v1/employee/{id}", h.Delete)
 
 	g.Run()
 }
