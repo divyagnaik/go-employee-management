@@ -78,7 +78,7 @@ func (s Store) GetAll(ctx *gofr.Context, page *pagination.Page) ([]models.Employ
 
 func (s Store) Update(ctx *gofr.Context, e *models.Employee) (*models.Employee, error) {
 	mu.Lock()
-    defer mu.Unlock()
+	defer mu.Unlock()
 
 	_, err := ctx.SQL.ExecContext(ctx, "UPDATE employee SET name=$1, position=$2, salary=$3 WHERE id=$4;", e.Name, e.Position, e.Salary, e.ID)
 	if err != nil {
@@ -89,8 +89,9 @@ func (s Store) Update(ctx *gofr.Context, e *models.Employee) (*models.Employee, 
 }
 
 func (s Store) Delete(ctx *gofr.Context, id int64) error {
-	 mu.Lock()
-    defer mu.Unlock()
+	mu.Lock()
+	defer mu.Unlock()
+
 	_, err := ctx.SQL.ExecContext(ctx, "DELETE FROM employee where id = $1;", id)
 	if err != nil {
 		return datasource.ErrorDB{Message: "Internal Server Error", Err: err}
